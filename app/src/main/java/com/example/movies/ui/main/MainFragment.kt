@@ -19,9 +19,8 @@ import com.example.movies.model.MoviesRepository
 import com.example.movies.ui.common.PermissionRequester
 import com.example.movies.ui.common.launchAndCollect
 import com.example.movies.ui.common.visible
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.flow.collect
 
 
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -30,7 +29,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         MainViewModelFactory(MoviesRepository(requireActivity().application))
     }
 
-    private lateinit var mainState : MainState
+    private lateinit var mainState: MainState
 
     private val adapter = MoviesAdapter { mainState.onMovieClicked(it) }
 
@@ -42,16 +41,32 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         val binding = FragmentMainBinding.bind(view).apply {
             recycler.adapter = adapter
         }
+//        viewLifecycleOwner.launchAndCollect(
+//            viewModel.state.map { it.loading }.distinctUntilChanged()
+//        ) { visible ->
+//            binding.progress.visible = visible
+//        }
+//
+//        viewLifecycleOwner.launchAndCollect(
+//            viewModel.state.map { it.movies }.distinctUntilChanged()
+//        ) { movies ->
+//            adapter.submitList(movies)
+//        }
 
-        viewLifecycleOwner.launchAndCollect(viewModel.state) { binding.updateUI(it) }
+        with(viewModel.state) {
+            diff({ it.movies }) { it?.let(adapter::submitList) }
+            diff({ it.loading }) { binding.progress.visible = it }
+        }
 
         mainState.requestLocationPermission {
             viewModel.onUiReady()
         }
     }
 
-    private fun FragmentMainBinding.updateUI(state: MainViewModel.UiState) {
-        progress.visible = state.loading
-        state.movies?.let(adapter::submitList)
+    private fun <T, U> Flow<T>.diff(mapFlow: (T) -> U, body: (U) -> Unit) {
+        viewLifecycleOwner.launchAndCollect(
+            flow = map(mapFlow).distinctUntilChanged(),
+            body = body
+        )
     }
 }
