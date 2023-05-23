@@ -36,9 +36,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             recycler.adapter = adapter
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect { binding.updateUI(it) }
+        viewLifecycleOwner.launchAndCollect(viewModel.state) { binding.updateUI(it) }
+
+        viewLifecycleOwner.launchAndCollect(viewModel.events) {
+            when (it) {
+                is MainViewModel.UiEvent.NavigateTo -> navigateTo(it.movie)
             }
         }
     }
@@ -46,7 +48,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun FragmentMainBinding.updateUI(state: MainViewModel.UiState) {
         progress.visible = state.loading
         state.movies?.let(adapter::submitList)
-        state.navigateTo?.let(::navigateTo)
     }
 
     private fun navigateTo(movie: Movie) {

@@ -16,6 +16,9 @@ class MainViewModel(private val moviesRepository: MoviesRepository) : ViewModel(
     private val _state = MutableStateFlow(UiState())
     val state: StateFlow<UiState> = _state.asStateFlow()
 
+    private val _events = Channel<UiEvent>()
+    val events = _events.receiveAsFlow()
+
     init {
         refresh()
     }
@@ -28,14 +31,19 @@ class MainViewModel(private val moviesRepository: MoviesRepository) : ViewModel(
     }
 
     fun onMovieClicked(movie: Movie) {
-        _state.value = _state.value.copy(navigateTo = movie)
+        viewModelScope.launch {
+            _events.send(UiEvent.NavigateTo(movie))
+        }
     }
 
     data class UiState(
         val loading: Boolean = false,
-        val movies: List<Movie>? = null,
-        val navigateTo: Movie? = null
+        val movies: List<Movie>? = null
     )
+
+    sealed interface UiEvent {
+        data class NavigateTo(val movie: Movie): UiEvent
+    }
 }
 class MainViewModelFactory(private val moviesRepository: MoviesRepository) :
     ViewModelProvider.Factory {
