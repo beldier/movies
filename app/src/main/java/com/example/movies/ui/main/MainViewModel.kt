@@ -3,10 +3,13 @@ package com.example.movies.ui.main
 import androidx.lifecycle.*
 import com.example.movies.model.Movie
 import com.example.movies.model.MoviesRepository
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+
 
 class MainViewModel(private val moviesRepository: MoviesRepository) : ViewModel() {
 
@@ -34,7 +37,6 @@ class MainViewModel(private val moviesRepository: MoviesRepository) : ViewModel(
         val navigateTo: Movie? = null
     )
 }
-
 class MainViewModelFactory(private val moviesRepository: MoviesRepository) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
