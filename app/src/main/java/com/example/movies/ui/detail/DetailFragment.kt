@@ -32,17 +32,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect { binding.updateUI(it) }
+                viewModel.state.collect { binding.movie = it.movie }
             }
         }
-    }
-
-    private fun FragmentDetailBinding.updateUI(state: DetailViewModel.UiState) {
-        val movie = state.movie
-
-        movieDetailToolbar.title = movie.title
-        movieDetailImage.loadUrl("https://image.tmdb.org/t/p/w780${movie.backdropPath}")
-        movieDetailSummary.text = movie.overview
-        movieDetailInfo.setMovie(movie)
     }
 }

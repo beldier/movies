@@ -33,14 +33,6 @@ inline fun <T> basicDiffUtil(
         areContentsTheSame(oldItem, newItem)
 }
 
-var View.visible: Boolean
-    get() = visibility == View.VISIBLE
-    set(value) {
-        visibility = if (value) View.VISIBLE else View.GONE
-    }
-
-
-
 fun <T> LifecycleOwner.launchAndCollect(
     flow: Flow<T>,
     state: Lifecycle.State = Lifecycle.State.STARTED,
