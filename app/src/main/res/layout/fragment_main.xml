@@ -5,7 +5,7 @@
 
     <data>
         <import type="java.util.List"/>
-        <import type="com.example.movies.model.Movie"/>
+        <import type="com.example.movies.model.database.Movie"/>
 
         <variable
             name="loading"

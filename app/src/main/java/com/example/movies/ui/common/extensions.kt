@@ -29,7 +29,7 @@ inline fun <T> basicDiffUtil(
     crossinline areContentsTheSame: (T, T) -> Boolean = { old, new -> old == new }
 ) = object : DiffUtil.ItemCallback<T>() {
     override fun areItemsTheSame(oldItem: T, newItem: T): Boolean =
-        areItemsTheSame(oldItem, newItem)`
+        areItemsTheSame(oldItem, newItem)
 
     override fun areContentsTheSame(oldItem: T, newItem: T): Boolean =
         areContentsTheSame(oldItem, newItem)

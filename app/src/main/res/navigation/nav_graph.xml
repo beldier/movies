@@ -25,6 +25,6 @@
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="movie"
-            app:argType="com.example.movies.model.Movie" />
+            app:argType="com.example.movies.model.database.Movie" />
     </fragment>
 </navigation>

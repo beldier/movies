@@ -1,13 +1,9 @@
 package com.example.movies.ui.main
 
 import androidx.lifecycle.*
-import com.example.movies.model.Movie
+import com.example.movies.model.database.Movie
 import com.example.movies.model.MoviesRepository
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 
@@ -17,10 +13,19 @@ class MainViewModel(private val moviesRepository: MoviesRepository) : ViewModel(
     private val _state = MutableStateFlow(UiState())
     val state: StateFlow<UiState> = _state.asStateFlow()
 
+    init {
+        viewModelScope.launch {
+            moviesRepository.popularMovies.collect { movies ->
+                _state.value = UiState(movies = movies, loading = false)
+            }
+        }
+    }
+
+
     fun onUiReady() {
         viewModelScope.launch {
             _state.value = UiState(loading = true)
-            _state.value = UiState(movies = moviesRepository.findPopularMovies().results)
+            moviesRepository.requestPopularMovies()
         }
     }
 

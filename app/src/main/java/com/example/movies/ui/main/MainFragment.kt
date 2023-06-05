@@ -11,13 +11,14 @@ import androidx.fragment.app.viewModels
 import com.example.movies.R
 import com.example.movies.databinding.FragmentMainBinding
 import com.example.movies.model.MoviesRepository
+import com.example.movies.ui.common.app
 import com.example.movies.ui.common.launchAndCollect
 
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val viewModel: MainViewModel by viewModels {
-        MainViewModelFactory(MoviesRepository(requireActivity().application))
+        MainViewModelFactory(MoviesRepository(requireActivity().app))
     }
 
     private lateinit var mainState: MainState

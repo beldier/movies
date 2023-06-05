@@ -1,14 +1,12 @@
 package com.example.movies.ui.main
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.databinding.ViewMovieBinding
-import com.example.movies.model.Movie
+import com.example.movies.model.database.Movie
 import com.example.movies.ui.common.basicDiffUtil
-import com.example.movies.ui.common.loadUrl
 
 class MoviesAdapter(private val listener: (Movie) -> Unit) :
     ListAdapter<Movie, MoviesAdapter.ViewHolder>(basicDiffUtil { old, new -> old.id == new.id }) {
