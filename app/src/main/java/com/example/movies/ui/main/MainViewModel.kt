@@ -16,7 +16,7 @@ class MainViewModel(private val moviesRepository: MoviesRepository) : ViewModel(
     init {
         viewModelScope.launch {
             moviesRepository.popularMovies.collect { movies ->
-                _state.value = UiState(movies = movies, loading = false)
+                _state.value = UiState(movies = movies)
             }
         }
     }
