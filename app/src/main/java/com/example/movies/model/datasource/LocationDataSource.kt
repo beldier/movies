@@ -1,7 +1,6 @@
-package com.example.movies.model
+package com.example.movies.model.datasource
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Application
 import android.location.Location
 import com.google.android.gms.location.LocationServices
