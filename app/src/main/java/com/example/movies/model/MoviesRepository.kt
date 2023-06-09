@@ -1,13 +1,10 @@
 package com.example.movies.model
 
-import android.app.Application
-import androidx.appcompat.app.AppCompatActivity
 import com.example.movies.App
 import com.example.movies.model.database.Movie
 import com.example.movies.model.datasource.MovieLocalDataSource
 import com.example.movies.model.datasource.MovieRemoteDataSource
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.Flow
 
 class MoviesRepository(application: App) {
 
@@ -19,9 +16,9 @@ class MoviesRepository(application: App) {
 
     val popularMovies = localDataSource.movies
 
-    fun findById(id: Int) = localDataSource.findById(id)
+    fun findById(id: Int): Flow<Movie> = localDataSource.findById(id)
 
-    suspend fun requestPopularMovies() = withContext(Dispatchers.IO) {
+    suspend fun requestPopularMovies() {
         if (localDataSource.isEmpty()) {
             val movies = remoteDataSource.findPopularMovies()
             localDataSource.save(movies.results.toLocalModel())
