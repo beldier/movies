@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.movies.R
 import com.example.movies.databinding.FragmentMainBinding
+import com.example.movies.domain.GetPopularMoviesUseCase
+import com.example.movies.domain.RequestPopularMoviesUseCase
 import com.example.movies.model.MoviesRepository
 import com.example.movies.ui.common.app
 import com.example.movies.ui.common.launchAndCollect
@@ -18,7 +20,11 @@ import com.example.movies.ui.common.launchAndCollect
 class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val viewModel: MainViewModel by viewModels {
-        MainViewModelFactory(MoviesRepository(requireActivity().app))
+        val repository = MoviesRepository(requireActivity().app)
+        MainViewModelFactory(
+            GetPopularMoviesUseCase(repository),
+            RequestPopularMoviesUseCase(repository)
+        )
     }
 
     private lateinit var mainState: MainState
