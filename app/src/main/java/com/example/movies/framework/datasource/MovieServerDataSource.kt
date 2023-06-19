@@ -1,10 +1,10 @@
-package com.example.movies.data.datasource
+package com.example.movies.framework.datasource
 
 import com.example.movies.data.RemoteConnection
 import com.example.movies.data.RemoteMovie
 import com.example.movies.domain.Movie
 
-class MovieRemoteDataSource(private val apiKey: String) {
+class MovieServerDataSource(private val apiKey: String) {
 
     suspend fun findPopularMovies(region: String): List<Movie> =
         RemoteConnection

@@ -4,8 +4,8 @@ import android.Manifest
 import android.app.Application
 import android.location.Geocoder
 import android.location.Location
-import com.example.movies.data.datasource.LocationDataSource
-import com.example.movies.data.datasource.PlayServicesLocationDataSource
+import com.example.movies.framework.datasource.LocationDataSource
+import com.example.movies.framework.datasource.PlayServicesLocationDataSource
 
 
 class RegionRepository(application: Application) {

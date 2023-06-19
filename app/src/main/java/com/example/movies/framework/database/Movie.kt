@@ -1,4 +1,4 @@
-package com.example.movies.data.database
+package com.example.movies.framework.database
 
 import android.os.Parcelable
 import androidx.room.Entity

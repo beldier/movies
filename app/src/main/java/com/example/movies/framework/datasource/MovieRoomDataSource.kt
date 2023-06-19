@@ -1,14 +1,14 @@
-package com.example.movies.data.datasource
+package com.example.movies.framework.datasource
 
-import com.example.movies.data.database.Movie as DbMovie
-import com.example.movies.data.database.MovieDao
+import com.example.movies.framework.database.Movie as DbMovie
+import com.example.movies.framework.database.MovieDao
 import com.example.movies.domain.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 
 
-class MovieLocalDataSource(private val movieDao: MovieDao) {
+class MovieRoomDataSource(private val movieDao: MovieDao) {
 
     val movies: Flow<List<Movie>> = movieDao.getAll().map { it.toDomainModel() }
 
