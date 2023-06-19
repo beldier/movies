@@ -1,9 +1,4 @@
-package com.example.movies.model
-
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlin.coroutines.resume
+package com.example.movies.data
 
 import android.app.Application
 import android.content.pm.PackageManager

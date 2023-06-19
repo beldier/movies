@@ -1,7 +1,6 @@
-package com.example.movies.model.datasource
+package com.example.movies.data.datasource
 
-import com.example.movies.model.RegionRepository
-import com.example.movies.model.RemoteConnection
+import com.example.movies.data.RemoteConnection
 
 class MovieRemoteDataSource(private val apiKey: String) {
 

@@ -1,9 +1,9 @@
-package com.example.movies.model
+package com.example.movies.data
 
 import com.example.movies.App
-import com.example.movies.model.database.Movie
-import com.example.movies.model.datasource.MovieLocalDataSource
-import com.example.movies.model.datasource.MovieRemoteDataSource
+import com.example.movies.data.database.Movie
+import com.example.movies.data.datasource.MovieLocalDataSource
+import com.example.movies.data.datasource.MovieRemoteDataSource
 import kotlinx.coroutines.flow.Flow
 
 class MoviesRepository(application: App) {

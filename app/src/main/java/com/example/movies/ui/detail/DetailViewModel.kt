@@ -3,17 +3,15 @@ package com.example.movies.ui.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.movies.domain.FindMovieUseCase
-import com.example.movies.domain.SwitchMovieFavoriteUseCase
-import com.example.movies.model.Error
-import com.example.movies.model.MoviesRepository
-import com.example.movies.model.database.Movie
-import com.example.movies.model.toError
+import com.example.movies.useCase.FindMovieUseCase
+import com.example.movies.useCase.SwitchMovieFavoriteUseCase
+import com.example.movies.data.Error
+import com.example.movies.data.database.Movie
+import com.example.movies.data.toError
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 

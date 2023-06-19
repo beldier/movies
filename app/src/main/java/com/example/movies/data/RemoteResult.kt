@@ -1,8 +1,6 @@
-package com.example.movies.model
+package com.example.movies.data
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
 data class RemoteResult(
     val page: Int,

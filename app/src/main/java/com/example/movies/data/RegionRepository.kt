@@ -1,11 +1,11 @@
-package com.example.movies.model
+package com.example.movies.data
 
 import android.Manifest
 import android.app.Application
 import android.location.Geocoder
 import android.location.Location
-import com.example.movies.model.datasource.LocationDataSource
-import com.example.movies.model.datasource.PlayServicesLocationDataSource
+import com.example.movies.data.datasource.LocationDataSource
+import com.example.movies.data.datasource.PlayServicesLocationDataSource
 
 
 class RegionRepository(application: Application) {

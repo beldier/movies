@@ -1,7 +1,7 @@
-package com.example.movies.model.datasource
+package com.example.movies.data.datasource
 
-import com.example.movies.model.database.Movie
-import com.example.movies.model.database.MovieDao
+import com.example.movies.data.database.Movie
+import com.example.movies.data.database.MovieDao
 import kotlinx.coroutines.flow.Flow
 
 

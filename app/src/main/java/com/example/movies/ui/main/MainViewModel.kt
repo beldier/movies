@@ -1,12 +1,11 @@
 package com.example.movies.ui.main
 
 import androidx.lifecycle.*
-import com.example.movies.domain.GetPopularMoviesUseCase
-import com.example.movies.domain.RequestPopularMoviesUseCase
-import com.example.movies.model.Error
-import com.example.movies.model.database.Movie
-import com.example.movies.model.MoviesRepository
-import com.example.movies.model.toError
+import com.example.movies.useCase.GetPopularMoviesUseCase
+import com.example.movies.useCase.RequestPopularMoviesUseCase
+import com.example.movies.data.Error
+import com.example.movies.data.database.Movie
+import com.example.movies.data.toError
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

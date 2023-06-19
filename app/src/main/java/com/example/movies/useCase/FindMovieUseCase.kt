@@ -1,6 +1,6 @@
-package com.example.movies.domain
+package com.example.movies.useCase
 
-import com.example.movies.model.MoviesRepository
+import com.example.movies.data.MoviesRepository
 
 class FindMovieUseCase(private val repository: MoviesRepository) {
 
