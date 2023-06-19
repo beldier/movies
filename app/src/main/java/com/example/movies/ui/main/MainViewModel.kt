@@ -4,8 +4,8 @@ import androidx.lifecycle.*
 import com.example.movies.useCase.GetPopularMoviesUseCase
 import com.example.movies.useCase.RequestPopularMoviesUseCase
 import com.example.movies.data.Error
-import com.example.movies.data.database.Movie
 import com.example.movies.data.toError
+import com.example.movies.domain.Movie
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

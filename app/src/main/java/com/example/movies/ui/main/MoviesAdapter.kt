@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.databinding.ViewMovieBinding
-import com.example.movies.data.database.Movie
+import com.example.movies.domain.Movie
 import com.example.movies.ui.common.basicDiffUtil
 
 class MoviesAdapter(private val listener: (Movie) -> Unit) :

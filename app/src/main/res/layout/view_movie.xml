@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.example.movies.data.database.Movie" />
+        <import type="com.example.movies.domain.Movie" />
 
         <variable
             name="movie"

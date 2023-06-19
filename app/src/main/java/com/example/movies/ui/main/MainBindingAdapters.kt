@@ -3,7 +3,7 @@ package com.example.movies.ui.main
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movies.data.database.Movie
+import com.example.movies.domain.Movie
 
 @BindingAdapter("items")
 fun RecyclerView.setItems(movies: List<Movie>?) {

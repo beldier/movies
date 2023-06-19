@@ -1,9 +1,9 @@
 package com.example.movies.data
 
 import com.example.movies.App
-import com.example.movies.data.database.Movie
 import com.example.movies.data.datasource.MovieLocalDataSource
 import com.example.movies.data.datasource.MovieRemoteDataSource
+import com.example.movies.domain.Movie
 import kotlinx.coroutines.flow.Flow
 
 class MoviesRepository(application: App) {
@@ -20,7 +20,7 @@ class MoviesRepository(application: App) {
     suspend fun requestPopularMovies(): Error? = tryCall {
         if (localDataSource.isEmpty()) {
             val movies = remoteDataSource.findPopularMovies(regionRepository.findLastRegion())
-            localDataSource.save(movies.results.toLocalModel())
+            localDataSource.save(movies)
         }
     }
     suspend fun switchFavorite(movie: Movie): Error? = tryCall  {
@@ -28,19 +28,3 @@ class MoviesRepository(application: App) {
         localDataSource.save(listOf(updatedMovie))
     }
 }
-
-private fun List<RemoteMovie>.toLocalModel(): List<Movie> = map { it.toLocalModel() }
-
-private fun RemoteMovie.toLocalModel(): Movie = Movie(
-    id = id,
-    title = title,
-    overview = overview,
-    releaseDate = releaseDate,
-    posterPath = posterPath,
-    backdropPath = backdropPath ?: "",
-    originalLanguage = originalLanguage,
-    originalTitle = originalTitle,
-    popularity = popularity,
-    voteAverage = voteAverage,
-    favorite = false
-)

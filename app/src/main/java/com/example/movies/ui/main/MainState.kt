@@ -7,11 +7,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.movies.R
-import com.example.movies.data.database.Movie
 import com.example.movies.ui.common.PermissionRequester
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import com.example.movies.data.Error
+import com.example.movies.domain.Movie
 
 
 fun Fragment.buildMainState(

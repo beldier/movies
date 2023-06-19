@@ -1,7 +1,7 @@
 package com.example.movies.useCase
 
 import com.example.movies.data.MoviesRepository
-import com.example.movies.data.database.Movie
+import com.example.movies.domain.Movie
 
 
 class SwitchMovieFavoriteUseCase(private val repository: MoviesRepository) {
