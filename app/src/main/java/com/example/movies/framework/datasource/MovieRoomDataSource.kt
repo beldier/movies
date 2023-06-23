@@ -1,5 +1,6 @@
 package com.example.movies.framework.datasource
 
+import com.example.movies.data.datasource.MovieLocalDataSource
 import com.example.movies.framework.database.Movie as DbMovie
 import com.example.movies.framework.database.MovieDao
 import com.example.movies.domain.Movie
@@ -8,15 +9,15 @@ import kotlinx.coroutines.flow.map
 
 
 
-class MovieRoomDataSource(private val movieDao: MovieDao) {
+class MovieRoomDataSource(private val movieDao: MovieDao):MovieLocalDataSource {
 
-    val movies: Flow<List<Movie>> = movieDao.getAll().map { it.toDomainModel() }
+    override val movies: Flow<List<Movie>> = movieDao.getAll().map { it.toDomainModel() }
 
-    suspend fun isEmpty(): Boolean = movieDao.movieCount() == 0
+    override suspend fun isEmpty(): Boolean = movieDao.movieCount() == 0
 
-    fun findById(id: Int): Flow<Movie> = movieDao.findById(id).map { it.toDomainModel() }
+    override fun findById(id: Int): Flow<Movie> = movieDao.findById(id).map { it.toDomainModel() }
 
-    suspend fun save(movies: List<Movie>) {
+    override suspend fun save(movies: List<Movie>) {
         movieDao.insertMovies(movies.fromDomainModel())
     }
 }
