@@ -1,21 +1,19 @@
-package com.example.movies.framework.datasource
+package com.example.movies.framework.server
 
-import com.example.movies.data.RemoteConnection
-import com.example.movies.data.RemoteMovie
 import com.example.movies.data.datasource.MovieRemoteDataSource
 import com.example.movies.domain.Movie
 
-class MovieServerDataSource(private val apiKey: String): MovieRemoteDataSource{
+class MovieServerDataSource(private val apiKey: String): MovieRemoteDataSource {
 
     override suspend fun findPopularMovies(region: String): List<Movie> =
-        RemoteConnection
-            .service
+        RemoteConnection.service
             .listPopularMovies(apiKey, region)
             .results
             .toDomainModel()
 }
 
 private fun List<RemoteMovie>.toDomainModel(): List<Movie> = map { it.toDomainModel() }
+
 
 private fun RemoteMovie.toDomainModel(): Movie =
     Movie(

@@ -1,4 +1,4 @@
-package com.example.movies.data
+package com.example.movies.domain
 
 import retrofit2.HttpException
 import java.io.IOException

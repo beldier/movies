@@ -1,4 +1,4 @@
-package com.example.movies.data
+package com.example.movies.framework.server
 
 import retrofit2.http.GET
 import retrofit2.http.Query

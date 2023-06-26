@@ -1,6 +1,6 @@
 package com.example.movies.useCase
 
-import com.example.movies.data.Error
+import com.example.movies.domain.Error
 import com.example.movies.data.MoviesRepository
 
 

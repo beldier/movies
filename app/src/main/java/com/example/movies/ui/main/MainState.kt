@@ -10,7 +10,7 @@ import com.example.movies.R
 import com.example.movies.ui.common.PermissionRequester
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import com.example.movies.data.Error
+import com.example.movies.domain.Error
 import com.example.movies.domain.Movie
 
 

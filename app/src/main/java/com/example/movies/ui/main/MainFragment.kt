@@ -13,8 +13,8 @@ import com.example.movies.data.MoviesRepository
 import com.example.movies.data.RegionRepository
 import com.example.movies.framework.AndroidPermissionChecker
 import com.example.movies.framework.datasource.MovieRoomDataSource
-import com.example.movies.framework.datasource.MovieServerDataSource
-import com.example.movies.framework.datasource.PlayServicesLocationDataSource
+import com.example.movies.framework.server.MovieServerDataSource
+import com.example.movies.framework.PlayServicesLocationDataSource
 import com.example.movies.ui.common.app
 import com.example.movies.ui.common.launchAndCollect
 

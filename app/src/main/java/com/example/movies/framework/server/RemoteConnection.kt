@@ -1,4 +1,4 @@
-package com.example.movies.data
+package com.example.movies.framework.server
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

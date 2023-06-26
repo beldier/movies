@@ -1,4 +1,4 @@
-package com.example.movies.framework.datasource
+package com.example.movies.framework
 
 import android.annotation.SuppressLint
 import android.app.Application

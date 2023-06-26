@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.movies.useCase.FindMovieUseCase
 import com.example.movies.useCase.SwitchMovieFavoriteUseCase
-import com.example.movies.data.Error
-import com.example.movies.data.toError
+import com.example.movies.domain.Error
+import com.example.movies.domain.toError
 import com.example.movies.domain.Movie
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
