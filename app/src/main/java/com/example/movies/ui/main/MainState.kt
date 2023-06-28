@@ -30,7 +30,7 @@ class MainState(
     private val navController: NavController,
     private val locationPermissionRequester: PermissionRequester
 ) {
-    fun onMovieClicked(movie: Movie) {
+    fun onMovieClicked(movie: com.example.movies.domain.Movie) {
         val action = MainFragmentDirections.actionMainToDetail(movie.id)
         navController.navigate(action)
     }
@@ -42,10 +42,10 @@ class MainState(
         }
     }
 
-    fun errorToString(error: Error) = when (error) {
-        Error.Connectivity -> context.getString(R.string.connectivity_error)
-        is Error.Server -> context.getString(R.string.server_error) + error.code
-        is Error.Unknown -> context.getString(R.string.unknown_error) + error.message
+    fun errorToString(error: com.example.movies.domain.Error) = when (error) {
+        com.example.movies.domain.Error.Connectivity -> context.getString(R.string.connectivity_error)
+        is com.example.movies.domain.Error.Server -> context.getString(R.string.server_error) + error.code
+        is com.example.movies.domain.Error.Unknown -> context.getString(R.string.unknown_error) + error.message
     }
 
 

@@ -5,11 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.databinding.ViewMovieBinding
-import com.example.movies.domain.Movie
 import com.example.movies.ui.common.basicDiffUtil
 
-class MoviesAdapter(private val listener: (Movie) -> Unit) :
-    ListAdapter<Movie, MoviesAdapter.ViewHolder>(basicDiffUtil { old, new -> old.id == new.id }) {
+class MoviesAdapter(private val listener: (com.example.movies.domain.Movie) -> Unit) :
+    ListAdapter<com.example.movies.domain.Movie, MoviesAdapter.ViewHolder>(basicDiffUtil { old, new -> old.id == new.id }) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -24,7 +23,7 @@ class MoviesAdapter(private val listener: (Movie) -> Unit) :
     }
 
     class ViewHolder(private val binding: ViewMovieBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: Movie) {
+        fun bind(movie: com.example.movies.domain.Movie) {
             binding.movie = movie
         }
     }

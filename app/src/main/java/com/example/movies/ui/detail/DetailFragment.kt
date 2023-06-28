@@ -8,14 +8,10 @@ import androidx.navigation.fragment.navArgs
 import com.example.movies.BuildConfig
 import com.example.movies.R
 import com.example.movies.databinding.FragmentDetailBinding
-import com.example.movies.useCase.FindMovieUseCase
-import com.example.movies.useCase.SwitchMovieFavoriteUseCase
-import com.example.movies.data.MoviesRepository
-import com.example.movies.data.RegionRepository
-import com.example.movies.framework.AndroidPermissionChecker
-import com.example.movies.framework.datasource.MovieRoomDataSource
-import com.example.movies.framework.server.MovieServerDataSource
-import com.example.movies.framework.PlayServicesLocationDataSource
+import com.example.movies.data.AndroidPermissionChecker
+import com.example.movies.data.database.MovieRoomDataSource
+import com.example.movies.data.server.MovieServerDataSource
+import com.example.movies.data.PlayServicesLocationDataSource
 import com.example.movies.ui.common.app
 import com.example.movies.ui.common.launchAndCollect
 
@@ -26,8 +22,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val viewModel: DetailViewModel by viewModels {
         val application = requireActivity().app
-        val repository = MoviesRepository(
-            RegionRepository(
+        val repository = com.example.movies.data.MoviesRepository(
+            com.example.movies.data.RegionRepository(
                 PlayServicesLocationDataSource(application),
                 AndroidPermissionChecker(application)
             ),
@@ -36,8 +32,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         )
         DetailViewModelFactory(
             safeArgs.movieId,
-            FindMovieUseCase(repository),
-            SwitchMovieFavoriteUseCase(repository)
+            com.example.movies.usecases.FindMovieUseCase(repository),
+            com.example.movies.usecases.SwitchMovieFavoriteUseCase(repository)
         )
     }
 

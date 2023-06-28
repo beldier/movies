@@ -1,19 +1,13 @@
 package com.example.movies.ui.main
 
 import androidx.lifecycle.*
-import com.example.movies.useCase.GetPopularMoviesUseCase
-import com.example.movies.useCase.RequestPopularMoviesUseCase
-import com.example.movies.domain.Error
-import com.example.movies.domain.toError
-import com.example.movies.domain.Movie
+import com.example.movies.data.toError
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-
-
 class MainViewModel(
-    getPopularMoviesUseCase: GetPopularMoviesUseCase,
-    private val requestPopularMoviesUseCase: RequestPopularMoviesUseCase
+    getPopularMoviesUseCase: com.example.movies.usecases.GetPopularMoviesUseCase,
+    private val requestPopularMoviesUseCase: com.example.movies.usecases.RequestPopularMoviesUseCase
 ) :
     ViewModel() {
 
@@ -28,7 +22,6 @@ class MainViewModel(
         }
     }
 
-
     fun onUiReady() {
         viewModelScope.launch {
             _state.value = _state.value.copy(loading = true)
@@ -39,15 +32,15 @@ class MainViewModel(
 
     data class UiState(
         val loading: Boolean = false,
-        val movies: List<Movie>? = null,
-        val error: Error? = null
+        val movies: List<com.example.movies.domain.Movie>? = null,
+        val error: com.example.movies.domain.Error? = null
     )
 }
 
 @Suppress("UNCHECKED_CAST")
 class MainViewModelFactory(
-    private val getPopularMoviesUseCase: GetPopularMoviesUseCase,
-    private val requestPopularMoviesUseCase: RequestPopularMoviesUseCase
+    private val getPopularMoviesUseCase: com.example.movies.usecases.GetPopularMoviesUseCase,
+    private val requestPopularMoviesUseCase: com.example.movies.usecases.RequestPopularMoviesUseCase
 ) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
