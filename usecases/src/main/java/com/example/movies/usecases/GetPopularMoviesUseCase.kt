@@ -1,8 +1,10 @@
 package com.example.movies.usecases
 
 import com.example.movies.data.MoviesRepository
+import org.koin.core.annotation.Factory
 
-class GetPopularMoviesUseCase(private val repository: com.example.movies.data.MoviesRepository) {
+@Factory
+class GetPopularMoviesUseCase(private val repository: MoviesRepository) {
 
     operator fun invoke() = repository.popularMovies
 }

@@ -11,6 +11,7 @@ import com.example.movies.usecases.FindMovieUseCase
 import com.example.movies.usecases.GetPopularMoviesUseCase
 import com.example.movies.usecases.RequestPopularMoviesUseCase
 import com.example.movies.usecases.SwitchMovieFavoriteUseCase
+import com.example.movies.usecases.UseCasesModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.annotation.ComponentScan
@@ -19,8 +20,6 @@ import org.koin.core.annotation.Named
 import org.koin.core.annotation.Single
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
-import org.koin.core.module.dsl.factoryOf
-import org.koin.dsl.module
 import org.koin.ksp.generated.module
 
 
@@ -28,7 +27,7 @@ fun Application.initDI() {
     startKoin {
         androidLogger(Level.ERROR)
         androidContext(this@initDI)
-        modules(AppModule().module, DataModule().module,useCasesModule,  )
+        modules(AppModule().module, DataModule().module, UseCasesModule().module)
     }
 }
 
@@ -51,10 +50,3 @@ class AppModule {
 }
 
 
-
-private val useCasesModule = module {
-    factoryOf( ::GetPopularMoviesUseCase)
-    factoryOf( ::RequestPopularMoviesUseCase)
-    factoryOf( ::FindMovieUseCase)
-    factoryOf( ::SwitchMovieFavoriteUseCase)
-}
