@@ -3,6 +3,7 @@ package com.example.movies
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
+import com.example.movies.data.DataModule
 import com.example.movies.data.MoviesRepository
 import com.example.movies.data.RegionRepository
 import com.example.movies.data.database.MovieDatabase
@@ -27,7 +28,7 @@ fun Application.initDI() {
     startKoin {
         androidLogger(Level.ERROR)
         androidContext(this@initDI)
-        modules(AppModule().module, dataModule, useCasesModule,  )
+        modules(AppModule().module, DataModule().module,useCasesModule,  )
     }
 }
 
@@ -49,10 +50,7 @@ class AppModule {
     fun movieDao(db: MovieDatabase) = db.movieDao()
 }
 
-private val dataModule = module {
-    factoryOf(::RegionRepository)
-    factoryOf(::MoviesRepository)
-}
+
 
 private val useCasesModule = module {
     factoryOf( ::GetPopularMoviesUseCase)

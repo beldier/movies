@@ -5,7 +5,9 @@ import com.example.movies.data.datasource.MovieRemoteDataSource
 import com.example.movies.domain.Error
 import com.example.movies.domain.Movie
 import kotlinx.coroutines.flow.Flow
+import org.koin.core.annotation.Factory
 
+@Factory
 class MoviesRepository(
     private val regionRepository: RegionRepository,
     private val localDataSource: MovieLocalDataSource,
