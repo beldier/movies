@@ -5,8 +5,12 @@ import com.example.movies.data.datasource.MovieRemoteDataSource
 import com.example.movies.data.tryCall
 import com.example.movies.domain.Error
 import com.example.movies.domain.Movie
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Named
 
-class MovieServerDataSource(private val apiKey: String): MovieRemoteDataSource {
+
+@Factory
+class MovieServerDataSource(@Named("apiKey") private val apiKey: String) : MovieRemoteDataSource {
 
     override suspend fun findPopularMovies(region: String): Either<Error, List<Movie>> = tryCall {
         RemoteConnection.service

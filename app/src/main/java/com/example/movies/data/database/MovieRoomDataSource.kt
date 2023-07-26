@@ -6,7 +6,9 @@ import com.example.movies.domain.Error
 import com.example.movies.domain.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Factory
 
+@Factory
 class MovieRoomDataSource(private val movieDao: MovieDao): MovieLocalDataSource {
 
 

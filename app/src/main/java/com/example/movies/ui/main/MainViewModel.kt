@@ -4,7 +4,9 @@ import androidx.lifecycle.*
 import com.example.movies.data.toError
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class MainViewModel(
     getPopularMoviesUseCase: com.example.movies.usecases.GetPopularMoviesUseCase,
     private val requestPopularMoviesUseCase: com.example.movies.usecases.RequestPopularMoviesUseCase

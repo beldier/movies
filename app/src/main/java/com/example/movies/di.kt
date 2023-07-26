@@ -1,67 +1,62 @@
 package com.example.movies
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
-import com.example.movies.data.AndroidPermissionChecker
 import com.example.movies.data.MoviesRepository
-import com.example.movies.data.PermissionChecker
-import com.example.movies.data.PlayServicesLocationDataSource
 import com.example.movies.data.RegionRepository
 import com.example.movies.data.database.MovieDatabase
-import com.example.movies.data.database.MovieRoomDataSource
-import com.example.movies.data.datasource.LocationDataSource
-import com.example.movies.data.datasource.MovieLocalDataSource
-import com.example.movies.data.datasource.MovieRemoteDataSource
-import com.example.movies.data.server.MovieServerDataSource
-import com.example.movies.ui.detail.DetailViewModel
-import com.example.movies.ui.main.MainViewModel
 import com.example.movies.usecases.FindMovieUseCase
 import com.example.movies.usecases.GetPopularMoviesUseCase
 import com.example.movies.usecases.RequestPopularMoviesUseCase
 import com.example.movies.usecases.SwitchMovieFavoriteUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Named
+import org.koin.core.annotation.Single
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
-import org.koin.core.qualifier.named
+import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
+import org.koin.ksp.generated.module
+
 
 fun Application.initDI() {
     startKoin {
         androidLogger(Level.ERROR)
         androidContext(this@initDI)
-        modules(appModule, dataModule, useCasesModule)
+        modules(AppModule().module, dataModule, useCasesModule,  )
     }
 }
 
-private val appModule = module {
-    single(named("apiKey")) { BuildConfig.apiKey }
-    single {
-        Room.databaseBuilder(
-            get(),
-            MovieDatabase::class.java, "movie-db"
-        ).build()
-    }
-    single { get<MovieDatabase>().movieDao() }
+@Module
+@ComponentScan
+class AppModule {
 
-    factory<MovieLocalDataSource> { MovieRoomDataSource(get()) }
-    factory<MovieRemoteDataSource> { MovieServerDataSource(get(named("apiKey"))) }
-    factory<LocationDataSource> { PlayServicesLocationDataSource(get()) }
-    factory<PermissionChecker> { AndroidPermissionChecker(get()) }
+    @Single
+    @Named("apiKey")
+    fun apiKey(ctx: Context) = ctx.getString(R.string.api_key)
 
-    viewModel { MainViewModel(get(), get()) }
-    viewModel { (id: Int) -> DetailViewModel(id, get(), get()) }
+    @Single
+    fun movieDatabase(ctx: Context) = Room.databaseBuilder(
+        ctx,
+        MovieDatabase::class.java, "movie-db"
+    ).build()
+
+    @Single
+    fun movieDao(db: MovieDatabase) = db.movieDao()
 }
 
 private val dataModule = module {
-    factory { RegionRepository(get(), get()) }
-    factory { MoviesRepository(get(), get(), get()) }
+    factoryOf(::RegionRepository)
+    factoryOf(::MoviesRepository)
 }
 
 private val useCasesModule = module {
-    factory { GetPopularMoviesUseCase(get()) }
-    factory { RequestPopularMoviesUseCase(get()) }
-    factory { FindMovieUseCase(get()) }
-    factory { SwitchMovieFavoriteUseCase(get()) }
+    factoryOf( ::GetPopularMoviesUseCase)
+    factoryOf( ::RequestPopularMoviesUseCase)
+    factoryOf( ::FindMovieUseCase)
+    factoryOf( ::SwitchMovieFavoriteUseCase)
 }
