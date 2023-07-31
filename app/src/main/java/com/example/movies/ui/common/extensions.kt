@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
@@ -48,3 +49,5 @@ fun <T> LifecycleOwner.launchAndCollect(
 
 val Context.app: App
     get() = applicationContext as App
+
+val Fragment.app: App get() = requireContext().app
