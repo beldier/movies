@@ -21,7 +21,7 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    @Named("apiKey")
+    @ApiKey
     fun provideApiKey(app: Application): String = app.getString(R.string.api_key)
 
     @Provides
@@ -37,7 +37,7 @@ object AppModule {
         MovieRoomDataSource(db.movieDao())
 
     @Provides
-    fun provideRemoteDataSource(@Named("apiKey") apiKey: String): MovieRemoteDataSource =
+    fun provideRemoteDataSource(@ApiKey apiKey: String): MovieRemoteDataSource =
         MovieServerDataSource(apiKey)
 
     @Provides
