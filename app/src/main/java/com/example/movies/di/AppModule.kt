@@ -12,6 +12,7 @@ import com.example.movies.data.datasource.LocationDataSource
 import com.example.movies.data.datasource.MovieLocalDataSource
 import com.example.movies.data.datasource.MovieRemoteDataSource
 import com.example.movies.data.server.MovieServerDataSource
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -33,18 +34,22 @@ object AppModule {
     ).build()
 
     @Provides
-    fun provideLocalDataSource(db: MovieDatabase): MovieLocalDataSource =
-        MovieRoomDataSource(db.movieDao())
+    @Singleton
+    fun provideMovieDao(db: MovieDatabase) = db.movieDao()
+}
 
-    @Provides
-    fun provideRemoteDataSource(@ApiKey apiKey: String): MovieRemoteDataSource =
-        MovieServerDataSource(apiKey)
+@Module
+abstract class AppDataModule {
 
-    @Provides
-    fun provideLocationDataSource(app: Application): LocationDataSource =
-        PlayServicesLocationDataSource(app)
+    @Binds
+    abstract fun bindLocalDataSource(localDataSource: MovieRoomDataSource): MovieLocalDataSource
 
-    @Provides
-    fun providePermissionChecker(app: Application): PermissionChecker =
-        AndroidPermissionChecker(app)
+    @Binds
+    abstract fun bindRemoteDataSource(remoteDataSource: MovieServerDataSource): MovieRemoteDataSource
+
+    @Binds
+    abstract fun bindLocationDataSource(locationDataSource: PlayServicesLocationDataSource): LocationDataSource
+    @Binds
+    abstract fun bindPermissionChecker(permissionChecker: AndroidPermissionChecker): PermissionChecker
+
 }

@@ -5,8 +5,9 @@ import com.example.movies.data.datasource.MovieRemoteDataSource
 import com.example.movies.domain.Error
 import com.example.movies.domain.Movie
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class MoviesRepository(
+class MoviesRepository @Inject constructor(
     private val regionRepository: RegionRepository,
     private val localDataSource: MovieLocalDataSource,
     private val remoteDataSource: MovieRemoteDataSource

@@ -4,8 +4,9 @@ import android.Manifest
 import android.app.Application
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
+import javax.inject.Inject
 
-class AndroidPermissionChecker(private val application: Application) :
+class AndroidPermissionChecker @Inject constructor(private val application: Application) :
     com.example.movies.data.PermissionChecker {
 
     override fun check(permission: com.example.movies.data.PermissionChecker.Permission): Boolean =

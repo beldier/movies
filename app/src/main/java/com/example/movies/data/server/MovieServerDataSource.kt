@@ -3,10 +3,12 @@ package com.example.movies.data.server
 import arrow.core.Either
 import com.example.movies.data.datasource.MovieRemoteDataSource
 import com.example.movies.data.tryCall
+import com.example.movies.di.ApiKey
 import com.example.movies.domain.Error
 import com.example.movies.domain.Movie
+import javax.inject.Inject
 
-class MovieServerDataSource(private val apiKey: String): MovieRemoteDataSource {
+class MovieServerDataSource @Inject constructor(@ApiKey private val apiKey: String): MovieRemoteDataSource {
 
     override suspend fun findPopularMovies(region: String): Either<Error, List<Movie>> = tryCall {
         RemoteConnection.service
