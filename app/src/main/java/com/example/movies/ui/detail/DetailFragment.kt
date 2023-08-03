@@ -14,29 +14,12 @@ import com.example.movies.data.server.MovieServerDataSource
 import com.example.movies.data.PlayServicesLocationDataSource
 import com.example.movies.ui.common.app
 import com.example.movies.ui.common.launchAndCollect
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class DetailFragment : Fragment(R.layout.fragment_detail) {
 
-    private val safeArgs: DetailFragmentArgs by navArgs()
-
-    private val viewModel: DetailViewModel by viewModels {
-        val application = requireActivity().app
-        val repository = com.example.movies.data.MoviesRepository(
-            com.example.movies.data.RegionRepository(
-                PlayServicesLocationDataSource(application),
-                AndroidPermissionChecker(application)
-            ),
-            MovieRoomDataSource(application.db.movieDao()),
-            MovieServerDataSource(BuildConfig.apiKey)
-        )
-        DetailViewModelFactory(
-            safeArgs.movieId,
-            com.example.movies.usecases.FindMovieUseCase(repository),
-            com.example.movies.usecases.SwitchMovieFavoriteUseCase(repository)
-        )
-    }
-
+    private val viewModel: DetailViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentDetailBinding.bind(view)

@@ -6,8 +6,9 @@ import com.example.movies.domain.Error
 import com.example.movies.domain.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class MovieRoomDataSource(private val movieDao: MovieDao): MovieLocalDataSource {
+class MovieRoomDataSource @Inject constructor(private val movieDao: MovieDao): MovieLocalDataSource {
 
 
     override val movies: Flow<List<Movie>> = movieDao.getAll().map { it.toDomainModel() }

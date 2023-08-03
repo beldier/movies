@@ -2,12 +2,16 @@ package com.example.movies.ui.main
 
 import androidx.lifecycle.*
 import com.example.movies.data.toError
+import com.example.movies.usecases.RequestPopularMoviesUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     getPopularMoviesUseCase: com.example.movies.usecases.GetPopularMoviesUseCase,
-    private val requestPopularMoviesUseCase: com.example.movies.usecases.RequestPopularMoviesUseCase
+    private val requestPopularMoviesUseCase: RequestPopularMoviesUseCase
 ) :
     ViewModel() {
 
@@ -35,15 +39,4 @@ class MainViewModel(
         val movies: List<com.example.movies.domain.Movie>? = null,
         val error: com.example.movies.domain.Error? = null
     )
-}
-
-@Suppress("UNCHECKED_CAST")
-class MainViewModelFactory(
-    private val getPopularMoviesUseCase: com.example.movies.usecases.GetPopularMoviesUseCase,
-    private val requestPopularMoviesUseCase: com.example.movies.usecases.RequestPopularMoviesUseCase
-) :
-    ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MainViewModel(getPopularMoviesUseCase, requestPopularMoviesUseCase) as T
-    }
 }
