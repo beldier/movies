@@ -10,19 +10,21 @@ import com.example.movies.databinding.FragmentMainBinding
 import com.example.movies.ui.common.app
 
 import com.example.movies.ui.common.launchAndCollect
+import javax.inject.Inject
 
 
 class MainFragment : Fragment(R.layout.fragment_main) {
-    private lateinit var component: MainFragmentComponent
 
-    private val viewModel: MainViewModel by viewModels { component.mainViewModelFactory }
+    @Inject
+    lateinit var vmFactoryy: MainViewModelFactory
+    private val viewModel: MainViewModel by viewModels { vmFactoryy }
 
     private lateinit var mainState: MainState
 
     private val adapter = MoviesAdapter { mainState.onMovieClicked(it) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        component = app.component.plus(MainFragmentModule())
+        app.component.inject(this)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

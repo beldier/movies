@@ -1,12 +1,8 @@
 package com.example.movies.di
 
 import android.app.Application
-import com.example.movies.ui.detail.DetailFragmentComponent
-import com.example.movies.ui.detail.DetailFragmentModule
-import com.example.movies.ui.detail.DetailViewModelFactory
-import com.example.movies.ui.main.MainFragmentComponent
-import com.example.movies.ui.main.MainFragmentModule
-import com.example.movies.ui.main.MainViewModelFactory
+import com.example.movies.ui.detail.DetailFragment
+import com.example.movies.ui.main.MainFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -14,11 +10,12 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [AppModule::class, AppDataModule::class])
 interface AppComponent {
-    fun plus(module: MainFragmentModule): MainFragmentComponent
-    fun plus(module: DetailFragmentModule): DetailFragmentComponent
 
+    fun inject(fragment: MainFragment)
+    fun inject(fragment: DetailFragment)
     @Component.Factory
     interface Factory {
         fun create(@BindsInstance app: Application): AppComponent
+
     }
 }

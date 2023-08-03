@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.example.movies.data.toError
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class MainViewModel(
     getPopularMoviesUseCase: com.example.movies.usecases.GetPopularMoviesUseCase,
@@ -38,7 +39,7 @@ class MainViewModel(
 }
 
 @Suppress("UNCHECKED_CAST")
-class MainViewModelFactory(
+class MainViewModelFactory @Inject constructor(
     private val getPopularMoviesUseCase: com.example.movies.usecases.GetPopularMoviesUseCase,
     private val requestPopularMoviesUseCase: com.example.movies.usecases.RequestPopularMoviesUseCase
 ) :

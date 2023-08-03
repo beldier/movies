@@ -9,19 +9,21 @@ import com.example.movies.R
 import com.example.movies.databinding.FragmentDetailBinding
 import com.example.movies.ui.common.app
 import com.example.movies.ui.common.launchAndCollect
+import javax.inject.Inject
 
 
 class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val safeArgs: DetailFragmentArgs by navArgs()
 
-    private lateinit var component: DetailFragmentComponent
+    @Inject
+    lateinit var vmFactory: DetailViewModelAssistedFactory
 
-    private val viewModel: DetailViewModel by viewModels { component.detailViewModelFactory }
+    private val viewModel: DetailViewModel by viewModels { vmFactory.create(safeArgs.movieId) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        component = app.component.plus(DetailFragmentModule(safeArgs.movieId))
+        app.component.inject(this)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
