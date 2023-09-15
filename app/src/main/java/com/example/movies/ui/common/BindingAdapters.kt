@@ -6,7 +6,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 
 @BindingAdapter("url")
-fun ImageView.bindUrl(url: String?) {
+fun ImageView.url(url: String) {
     if (url != null) loadUrl(url)
 }
 
