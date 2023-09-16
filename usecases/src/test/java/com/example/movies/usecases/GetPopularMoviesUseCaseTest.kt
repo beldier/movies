@@ -6,6 +6,7 @@ import org.junit.Assert.*
 import org.junit.Test
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import com.example.movies.testShared.sampleMovie
 
 class GetPopularMoviesUseCaseTest {
 

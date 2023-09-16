@@ -5,6 +5,7 @@ import com.example.movies.data.datasource.MovieLocalDataSource
 import com.example.movies.data.datasource.MovieRemoteDataSource
 import com.example.movies.domain.Movie
 import kotlinx.coroutines.flow.flowOf
+import com.example.movies.testShared.sampleMovie
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before

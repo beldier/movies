@@ -2,10 +2,10 @@ package com.example.movies.usecases
 
 import com.example.movies.data.MoviesRepository
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.*
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
+import com.example.movies.testShared.sampleMovie
 
 class SwitchMovieFavoriteUseCaseTest {
 

@@ -1,8 +1,8 @@
-package com.example.movies.usecases
+package com.example.movies.testShared
 
 import com.example.movies.domain.Movie
 
-internal val sampleMovie = Movie(
+val sampleMovie = Movie(
     0,
     "Title",
     "Overview",
